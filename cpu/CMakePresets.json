@@ -1,0 +1,63 @@
+﻿{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES"
+      }
+    },
+    {
+      "name": "debug",
+      "hidden": true,
+      "inherits": "default",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release",
+      "hidden": true,
+      "inherits": "default",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "local",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "icx.exe",
+        "CMAKE_CXX_COMPILER": "icx.exe"
+      }
+    },
+    {
+      "name": "local-debug",
+      "inherits": [
+        "debug",
+        "local"
+      ]
+    },
+    {
+      "name": "local-release",
+      "inherits": [
+        "release",
+        "local"
+      ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "local-debug",
+      "configurePreset": "local-debug"
+    },
+    {
+      "name": "local-release",
+      "configurePreset": "local-release"
+    }
+  ]
+}
