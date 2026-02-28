@@ -28,33 +28,20 @@ install(TARGETS ${PROJECT_NAME}
 
 
 
-set(Common_PATH "${CMAKE_CURRENT_BINARY_DIR}/../../src/Common")
-add_dependencies(${PROJECT_NAME} Common::Core)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE
-	Common::Core
-)
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    $<$<PLATFORM_ID:Windows>:${Common_PATH}/Common_Core.dll>
-    $<$<PLATFORM_ID:Linux>:${Common_PATH}/Common_Core.so>
-    $<TARGET_FILE_DIR:${PROJECT_NAME}>
-)
-
 set(CudaCommon_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../cuda/out/install/local-release")
-set(CMAKE_PREFIX_PATH "${CudaCommon_PATH}")
+list(APPEND CMAKE_PREFIX_PATH "${CudaCommon_PATH}")
 find_package(CudaCommon REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
+    Common::Core
     CudaCommon::CudaCore
 )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    $<$<PLATFORM_ID:Windows>:${CudaCommon_PATH}/bin/CudaCommon_CudaCore.dll>
-    $<$<PLATFORM_ID:Linux>:${CudaCommon_PATH}/lib/CudaCommon_CudaCore.so>
-    $<TARGET_FILE_DIR:${PROJECT_NAME}>
+        $<TARGET_FILE:Common::Core>
+        $<TARGET_FILE:CudaCommon::CudaCore>
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )
 
 
