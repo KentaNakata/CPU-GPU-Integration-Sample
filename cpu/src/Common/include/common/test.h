@@ -8,4 +8,4 @@
 #define Common_API
 #endif
 
-Common_API int core();
+Common_API int common_test();

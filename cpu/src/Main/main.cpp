@@ -1,13 +1,10 @@
 ﻿#include "main/main.h"
-#include "common/core.h"
-#include "cudacommon/cudacore.h"
-
-#include <iostream>
+#include "common/test.h"
+#include "cudacommon/test.h"
 
 int main()
 {
-    std::cout << "main/main" << std::endl;
-    core();
-    cudacore();
+    common_test();
+    cudacommon_test();
     return 0;
 }

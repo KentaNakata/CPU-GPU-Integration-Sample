@@ -8,4 +8,4 @@
 #define CudaCommon_API
 #endif
 
-CudaCommon_API int cudacore();
+CudaCommon_API int cudacommon_test();

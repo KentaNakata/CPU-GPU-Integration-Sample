@@ -1,27 +1,34 @@
 ﻿CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 
 project("CudaCommon" CXX)
-set(module_names "CudaCore")
+set(module_names "CudaCore" "CudaTest")
 
 
 
 add_library("CudaCore" SHARED
-	"cudacore.cpp"
+	"test.cpp"
 )
 
-target_include_directories(${module_names} PUBLIC
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
+add_library("CudaTest" SHARED
+	"test.cpp"
 )
 
-target_compile_definitions(${module_names} PRIVATE
-    $<$<PLATFORM_ID:Windows>:__WINDOWS__>
-    $<$<PLATFORM_ID:Linux>:__LINUX__>
-    $<BUILD_INTERFACE:BUILD_${PROJECT_NAME}>
-)
-target_compile_definitions(${module_names} PUBLIC
-    $<INSTALL_INTERFACE:USE_${PROJECT_NAME}>
-)
+foreach(module ${module_names})
+    target_include_directories(${module} PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+    )
+
+    target_compile_definitions(${module} PRIVATE
+        $<$<PLATFORM_ID:Windows>:__WINDOWS__>
+        $<$<PLATFORM_ID:Linux>:__LINUX__>
+        $<BUILD_INTERFACE:BUILD_${PROJECT_NAME}>
+    )
+
+    target_compile_definitions(${module} PUBLIC
+        $<INSTALL_INTERFACE:USE_${PROJECT_NAME}>
+    )
+endforeach()
 
 
 
