@@ -2,4 +2,8 @@
 
 #include "api.h"
 
-CudaCommon_API int cudacommon_test();
+namespace cudacommon {
+
+CudaCommon_API int test();
+
+}    // namespace cudacommon

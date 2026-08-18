@@ -2,4 +2,8 @@
 
 #include "api.h"
 
-Common_API int common_test();
+namespace common {
+
+Common_API int test();
+
+}    // namespace common

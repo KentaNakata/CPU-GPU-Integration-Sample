@@ -3,13 +3,15 @@
 #include <cuda_runtime.h>
 #include <cstdio>
 
+namespace cudacommon {
+
 __global__ void kernel(int* result)
 {
     printf("Hello from kernel()\n");
     *result = 9;
 }
 
-int cudacommon_compute()
+int compute()
 {
     int* d_result = nullptr;
     int  h_result = 0;
@@ -48,3 +50,5 @@ int cudacommon_compute()
     cudaFree(d_result);
     return h_result;
 }
+
+}    // namespace cudacommon

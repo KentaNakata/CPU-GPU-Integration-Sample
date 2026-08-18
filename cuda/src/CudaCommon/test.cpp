@@ -2,8 +2,12 @@
 
 #include <iostream>
 
-int cudacommon_test()
+namespace cudacommon {
+
+int test()
 {
     std::cout << "Hello from CudaCommon" << std::endl;
     return 0;
 }
+
+}    // namespace cudacommon

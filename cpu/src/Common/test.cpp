@@ -2,8 +2,12 @@
 
 #include <iostream>
 
-int common_test()
+namespace common {
+
+int test()
 {
     std::cout << "Hello from Common" << std::endl;
     return 0;
 }
+
+}    // namespace common

@@ -23,8 +23,8 @@ void computeSample()
 
 int main()
 {
-    common_test();
-    cudacommon_test();
+    common::test();
+    cudacommon::test();
 
     std::cout << std::endl;
 
@@ -32,7 +32,7 @@ int main()
 
     std::cout << std::endl;
 
-    const auto result = cudacommon_compute();
+    const auto result = cudacommon::compute();
     std::cout << "result: " << result << std::endl;
 
     return 0;
