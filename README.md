@@ -1,15 +1,15 @@
-# CPU/CUDA サンプルプロジェクト
+# CPU/GPU サンプルプロジェクト
 
 ## はじめに
 
-このプロジェクトは、CPU と CUDA を組み合わせた C++ ベースのサンプルプログラムです。CPU 側と GPU (CUDA) 側の計算を統合して実行できます。
+このプロジェクトは、CPU と GPU(CUDA) を組み合わせた C++ ベースのサンプルプログラムです。
 
-**ポイント**：GPUカーネルを、dllとしてCPUプログラムの外部に切り離しています。これにより、
+**ポイント**：GPU側の計算を、DLL/SOとしてCPUプログラムの外部に切り離しています。これにより、
 
 > CPU側はicxでビルド・GPU側はmsvcとnvccでビルド
 
-など、コンパイラの使い分け等が可能になります。
-各環境のビルド設定は、CPU・GPUそれぞれ、CMakePresets.jsonに集約しています。
+など、コンパイラの細かい使い分け等が可能になります。
+環境ごとに個別のビルド設定は、CPU・GPUそれぞれ、CMakePresets.jsonに集約しています。サーバーごとに設定の異なる項目はここで吸収します。
 
 ※ このREADMEはAIによる要約を含みます。
 
@@ -20,9 +20,8 @@
 - **GPU 側**: 簡単な CUDA カーネルの呼び出し
 
 ### 技術スタック
-- **言語**: C++20
-- **GPU**: NVIDIA CUDA
-- **ビルドシステム**: CMake 3.14+
+- **言語**: C++20, CUDA
+- **ビルドシステム**: CMake
 - **コンパイラ**: MSVC, NVCC 等
 
 ---
@@ -135,9 +134,11 @@ out/
 
 ### 前提条件
 
-- **Windows**: Visual Studio 2019 以上、Ninja ビルドツール
-- **Linux**: GCC 10 以上、CMake 3.14 以上、Ninja (推奨)
-- **CUDA**: NVIDIA CUDA Toolkit 11.0 以上
+下記環境でビルドを確認しました。
+
+- Visual Studio 2026 (MSVC 14.51)
+- Ninja 1.13.2
+- NVIDIA GPU Computing Toolkit CUDA 13.3
 
 ### 1. CUDA コンポーネントのビルド
 
@@ -190,8 +191,8 @@ Main.exe
 ├─ common::test()         → "Hello from Common" を出力
 ├─ cudacommon::test()     → "Hello from CudaCommon" を出力
 ├─ computeSample()        → データコンテナの操作デモ
-│  ├─ DataContainer を生成 (3x2 サイズ)
-│  ├─ データを設定 (container[0,0]=1, container[2,1]=2)
+│  ├─ DataContainer を生成
+│  ├─ データを設定
 │  └─ DataViewer で表示
 └─ cudacommon::compute()  → CUDA カーネルを実行、結果を返す
    ├─ GPU メモリ確保
@@ -217,7 +218,7 @@ result: 9
 
 ## 🛠️ トラブルシューティング
 
-### CUDA が見つからないエラー
+### CUDACommon が見つからないエラー
 
 ```
 CMake Error: Could not find CudaCommon
@@ -229,10 +230,6 @@ cd cuda
 cmake --preset local-release
 cmake --build --preset local-release
 ```
-
-### コンパイル失敗 (undefined reference)
-
-ヘッダー依存関係が不足している可能性があります。[CODE_REVIEW.md](CODE_REVIEW.md) の「1. 未定義の型参照」を参照してください。
 
 ### Ninja が見つからないエラー
 
