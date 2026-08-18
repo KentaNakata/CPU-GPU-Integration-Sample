@@ -28,10 +28,13 @@ install(TARGETS ${PROJECT_NAME}
 
 
 
-set(CudaCommon_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../cuda/out/install/local-release")
+set(CudaCommon_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../cuda/out/install/local-release") # [TODO] CudaCommonプロジェクトのパスのハードコーディング解消
 list(APPEND CMAKE_PREFIX_PATH "${CudaCommon_PATH}")
+
+# 外部CMakeプロジェクト(CudaCommon)をfind_package
 find_package(CudaCommon REQUIRED)
 
+# 作成したCommonやCudaCommonプロジェクトは、モダンなCMake記法を可能にしている
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Common::Core
     Common::Test
