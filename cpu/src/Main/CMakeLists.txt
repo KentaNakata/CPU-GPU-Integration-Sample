@@ -34,13 +34,17 @@ find_package(CudaCommon REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Common::Core
+    Common::Test
     CudaCommon::CudaCore
+    CudaCommon::CudaTest
 )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:Common::Core>
+        $<TARGET_FILE:Common::Test>
         $<TARGET_FILE:CudaCommon::CudaCore>
+        $<TARGET_FILE:CudaCommon::CudaTest>
         $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )
 
