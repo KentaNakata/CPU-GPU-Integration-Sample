@@ -1,12 +1,14 @@
 ﻿CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 
-project("CudaCommon" CXX)
+project("CudaCommon" CXX CUDA)
 set(module_names "CudaCore" "CudaTest")
+
+find_package(CUDAToolkit REQUIRED)
 
 
 
 add_library("CudaCore" SHARED
-	"test.cpp"
+	"compute.cu"
 )
 
 add_library("CudaTest" SHARED

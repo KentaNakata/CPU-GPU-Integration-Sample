@@ -1,9 +1,25 @@
 ﻿#include "main/main.h"
+
 #include "common/test.h"
 #include "cudacommon/test.h"
 
 #include "common/DataContainer.h"
 #include "common/DataViewer.h"
+#include "cudacommon/compute.h"
+
+void computeSample()
+{
+    const Point2d<intType>  begin{0, 0};
+    const Length2d<intType> size{3, 2};
+
+    DataContainer container(size);
+    DataViewer    viewer(container);
+
+    container.value({0, 0}) = 1;
+    container.value({2, 1}) = 2;
+
+    viewer.showValues(begin, size);
+}
 
 int main()
 {
@@ -12,11 +28,12 @@ int main()
 
     std::cout << std::endl;
 
-    DataContainer d({3, 2});
-    DataViewer    v(d);
+    computeSample();
 
-    d.value({1, 1}) = 1;
-    v.showValues({0, 0}, {3, 2});
+    std::cout << std::endl;
+
+    const auto result = cudacommon_compute();
+    std::cout << "result: " << result << std::endl;
 
     return 0;
 }
