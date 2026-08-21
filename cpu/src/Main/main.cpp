@@ -7,16 +7,19 @@
 
 void computeSample()
 {
-    const Point2d<intType>  begin{0, 0};
-    const Length2d<intType> size{3, 2};
+    using dataType                 = std::int32_t;
+    constexpr auto memoryOrderType = MemoryOrder::XMajor;
 
-    DataContainer container(size);
-    DataViewer    viewer(container);
+    const Length2d<intType> size{3, 2};
+    const Point2d<intType>  begin{0, 0};
+
+    DataContainer<dataType, memoryOrderType> container(size, begin);
+    DataViewer                               viewer(container);
 
     container.value({0, 0}) = 1;
     container.value({2, 1}) = 2;
 
-    viewer.showValues(begin, size);
+    viewer.showAllValues();
 }
 
 int main()
