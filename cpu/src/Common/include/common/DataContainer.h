@@ -6,16 +6,18 @@
 
 class Common_API DataContainer {
 public:
-    using vType = std::int32_t;
+    using dataType = std::int32_t;
+
+    static inline constexpr MemoryOrder dataOrderType = MemoryOrder::XMajor;
 
 private:
-    std::vector<vType> v;
+    std::vector<dataType> data;
 
-    const Accessor acc;
+    const Accessor<dataOrderType> accessor;
 
 public:
-    DataContainer(const Length2d<intType>& size);
+    DataContainer(const Length2d<intType>& size, const Point2d<intType> beginPoint = Point2d<intType>{0, 0});
 
-    inline const vType& value(const Point2d<intType>& p) const { return v[acc(p)]; }
-    inline vType&       value(const Point2d<intType>& p) { return v[acc(p)]; }
+    inline const dataType& value(const Point2d<intType>& p) const { return data[accessor(p)]; }
+    inline dataType&       value(const Point2d<intType>& p) { return data[accessor(p)]; }
 };

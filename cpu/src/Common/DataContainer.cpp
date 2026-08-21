@@ -1,7 +1,8 @@
 ﻿#include "common/DataContainer.h"
 
-DataContainer::DataContainer(const Length2d<intType>& size) : acc(size)
+DataContainer::DataContainer(const Length2d<intType>& size, const Point2d<intType> beginPoint)
+    : accessor(size, beginPoint)
 {
-    v.resize(volume(size));
-    v.shrink_to_fit();
+    data.resize(volume(size));
+    data.shrink_to_fit();
 }
