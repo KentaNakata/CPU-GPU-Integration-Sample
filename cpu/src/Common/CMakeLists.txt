@@ -10,12 +10,12 @@ set(module_names "Core" "Test")
 # TestはHelloWorld関数のみを持つ
 
 add_library("Core" SHARED
-	"DataContainer.cpp"
-	"DataViewer.cpp"
+    "DataContainer.cpp"
+    "DataViewer.cpp"
 )
 
 add_library("Test" SHARED
-	"test.cpp"
+    "test.cpp"
 )
 
 foreach(module ${module_names})

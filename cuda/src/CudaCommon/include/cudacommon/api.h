@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // ビルド時はBUILD_CudaCommonマクロが定義される。これによりビルド時は、シンボルがエクスポート設定になる
 // インストール時はUSE_CudaCommonマクロが定義される。これにより外部からdllが参照された時は、シンボルがインポート設定になる

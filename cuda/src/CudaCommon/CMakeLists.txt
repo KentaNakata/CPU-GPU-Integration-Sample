@@ -12,11 +12,11 @@ find_package(CUDAToolkit REQUIRED)
 # CudaTestはHelloWorld関数のみを持つ
 
 add_library("CudaCore" SHARED
-	"compute.cu"
+    "compute.cu"
 )
 
 add_library("CudaTest" SHARED
-	"test.cpp"
+    "test.cpp"
 )
 
 foreach(module ${module_names})
