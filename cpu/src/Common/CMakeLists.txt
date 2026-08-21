@@ -12,6 +12,7 @@ set(module_names "Core" "Test")
 add_library("Core" SHARED
     "DataContainer.cpp"
     "DataViewer.cpp"
+    "compute.cpp"
 )
 
 add_library("Test" SHARED

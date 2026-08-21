@@ -40,26 +40,25 @@ dlybbs/
 │   └── src/
 │       ├── Common/            # 共有ライブラリ (Core, Test)
 │       │   ├── CMakeLists.txt
+│       │   ├── compute.cpp
 │       │   ├── DataContainer.cpp
 │       │   ├── DataViewer.cpp
 │       │   ├── test.cpp
 │       │   ├── include/
 │       │   │   └── common/
-│       │   │       ├── api.h              # DLL エクスポート マクロ
 │       │   │       ├── Accessor.h        # メモリアクセス補助
+│       │   │       ├── api.h             # DLL インポート/エクスポート マクロ
+│       │   │       ├── compute.h
 │       │   │       ├── DataContainer.h   # データコンテナクラス
 │       │   │       ├── DataViewer.h      # データ表示クラス
-│       │   │       ├── Notations.h       # 2D/3D 型定義
+│       │   │       ├── notations.h       # 2D/3D 型定義
 │       │   │       └── test.h
 │       │   └── cmake/
 │       │       └── CommonConfig.cmake
 │       │
 │       └── Main/              # メイン実行ファイル
 │           ├── CMakeLists.txt
-│           ├── main.cpp
-│           ├── include/
-│           │   └── main/
-│           │       └── main.h
+│           └── main.cpp
 │
 └── cuda/                      # CUDA コンポーネント
     ├── CMakeLists.txt

@@ -11,8 +11,10 @@ class Common_API DataViewer {
 public:
     DataViewer(const DataContainer<dataType, order>& container) : container(container) {}
 
+    // DataContainer の全範囲の値を表示する
     void showAllValues() const { showValues(container.getBeginPoint(), container.getSize()); }
 
+    // DataContainer の指定範囲の値を表示する
     void showValues(const Point2d<intType>& start, const Length2d<intType>& count) const
     {
         const auto end = start + count;

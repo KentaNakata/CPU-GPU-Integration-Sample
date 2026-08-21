@@ -6,11 +6,11 @@
 
 template <typename dataType, MemoryOrder order>
 class Common_API DataContainer {
-    std::vector<dataType> data;
-    const Accessor<order> accessor;
+    std::vector<dataType> data;        // データ本体
+    const Accessor<order> accessor;    // Point2d 型の座標からデータのインデックスを計算するアクセサ
 
-    const Length2d<intType> size;
-    const Point2d<intType>  beginPoint;
+    const Length2d<intType> size;          // データのサイズ
+    const Point2d<intType>  beginPoint;    // データの始点座標
 
 public:
     DataContainer(const Length2d<intType>& size, const Point2d<intType> beginPoint = Point2d<intType>{0, 0})

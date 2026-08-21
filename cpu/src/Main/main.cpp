@@ -1,41 +1,25 @@
 ﻿#include "common/test.h"
 #include "cudacommon/test.h"
 
-#include "common/DataContainer.h"
-#include "common/DataViewer.h"
+#include "common/compute.h"
 #include "cudacommon/compute.h"
 
-void computeSample()
-{
-    using dataType                 = std::int32_t;
-    constexpr auto memoryOrderType = MemoryOrder::XMajor;
-
-    const Length2d<intType> size{3, 2};
-    const Point2d<intType>  begin{0, 0};
-
-    DataContainer<dataType, memoryOrderType> container(size, begin);
-    DataViewer                               viewer(container);
-
-    container.value({0, 0}) = 1;
-    container.value({2, 1}) = 2;
-
-    viewer.showAllValues();
-}
+#include <iostream>
 
 int main()
 {
-    // このCMakeプロジェクト(Main)が依存するプロジェクト(Common)の関数を呼ぶ
+    // 外部のCMakeプロジェクトの関数をDLL/SO経由で呼ぶ
     common::test();
-    // 外部のCMakeプロジェクト(CudaCommon)をdll経由で呼ぶ
     cudacommon::test();
 
     std::cout << std::endl;
+    std::cout << "compute with CPU" << std::endl;
 
-    computeSample();
+    common::compute();
 
     std::cout << std::endl;
+    std::cout << "compute with GPU" << std::endl;
 
-    // 外部のCMakeプロジェクト(CudaCommon)のGPUカーネルをdll経由で呼ぶ
     const auto result = cudacommon::compute();
     std::cout << "result: " << result << std::endl;
 
